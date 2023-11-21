@@ -1,4 +1,5 @@
 import { UserModel } from "../../db/schema.js";
+import { getEncryptedPassword } from "../../middlewares/hashing/bycrpt_helper.js";
 /**
  * This register_handler function will save the register details
  * @param {*} request request object of Express
@@ -9,31 +10,39 @@ function register_handler(request, response) {
   const {
     firstname,
     lastname,
-    project,
-    department,
     email,
-    phone_number
+    phone_number,
+    password,
+    username
   } = request.body;
   const user_data = {
     firstname,
     lastname,
-    project,
-    department,
     email,
-    phone_number
+    phone_number,
+    password,
+    username
   };
-  //declaring a variable of userdata
-  const UserData = new UserModel(user_data);
 
-  UserData.save()
-    .then(() => {
-      console.log("data saved");
-      response.send({ msg: "User register successfully", status:200 , firstname: firstname});
-    })
-    .catch((err) => {
-      console.log(err);
-      response.send({err_msg: "unable to add data"})
-    });
+  getEncryptedPassword(user_data.password, (err, hashed_password) => {
+    user_data.password = hashed_password;
+
+    //declaring a variable of userdata
+    const UserData = new UserModel(user_data);
+    UserData.save()
+      .then(() => {
+        console.log("data saved");
+        response.send({ msg: "User register successfully", status: 200, firstname: firstname });
+      })
+      .catch((err) => {
+        console.log(err);
+        response.send({ err_msg: "unable to add data" })
+      });
+
+  })
+
+
+
 }
 
 export { register_handler };

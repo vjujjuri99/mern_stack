@@ -1,5 +1,3 @@
-//importing internal dependencies
-// importing Employee_Data model
 
 import { UserModel } from "../db/schema.js";
 
@@ -26,7 +24,7 @@ function register_db_validator(req, res, next) {
             if (user_found.email == email) {
               if (user_found.phone_number == phone_number) {
                 res
-                  .send({
+                  .send({ status: 400,
                     err_msg:
                       phone_number +
                       " " +
@@ -34,7 +32,7 @@ function register_db_validator(req, res, next) {
                       " email and Mobile Number already exists",
                   });
               } else {
-                res.send({ err_msg: email + "Email already exits" });
+                res.send({ status: 400, err_msg: email + "Email already exits" });
               }
             }
           });

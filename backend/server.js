@@ -3,6 +3,8 @@ import express      from "express";
 import bodyParser	from "body-parser";
 import mongoose 	from "mongoose";
 import cors from 'cors';
+import dotenv																																from "dotenv";
+dotenv.config(); // for reading from .env file
 //importing internal dependencies
 // handlers
 import { register_handler }       from "./path_handlers/index.js";
@@ -15,14 +17,18 @@ import { register_db_validator } from "./utils/db_validators.js";
 import { get_details_byId } from "./path_handlers/index.js";
 import { update_alldetails_handler } from "./path_handlers/put/update_all.js";
 import { delete_handler_byID } from "./path_handlers/delete/delete_handler.js";
+import { handleGenerateOTPEndpoint } from "./path_handlers/post/generate_otp.js";
+import { login_handler } from "./path_handlers/post/login_handler.js";
 const app = express()
 app.use(cors({origin: "*"}))
 app.use(bodyParser.json());                          //Returns middleware that only parses json
 app.use(bodyParser.urlencoded({ extended: true }));  //Returns middleware that only parses urlencoded bodies
 
 /************POST CALL ***********/
-app.post("/create_profile", employee_data_validator,register_db_validator,register_handler)
+app.post("/create_profile",register_db_validator,register_handler)
 app.post("/get_emp_details", get_details)
+app.post('/generateOtp', handleGenerateOTPEndpoint)
+app.post('/auth/login', login_handler)
 
 /************GET CALL************/
 app.get("/get_all_emp_details", get_employee_details_handler)
@@ -37,10 +43,10 @@ app.delete('/delete_details', delete_handler)
 app.delete('/deletebyId/:id', delete_handler_byID)
 
 //listening to server
-mongoose.connect("mongodb+srv://vinayjujjuri:vinay911146@cluster0.gefif.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
-    app.listen(4000, ()=>{
-        console.log("server started and listening in port 4000")
+    app.listen(process.env.BACKEND_PORT, ()=>{
+        console.log(`server started and listening in port ${process.env.BACKEND_PORT}`)
     })
 })
 .catch((err)=>{
