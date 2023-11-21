@@ -1,4 +1,4 @@
-import { UserOTPModel } from "../../db/schema.js";
+import { UserOTPModel } from "../../../db/schema.js";
 import twilio from 'twilio';
 import dotenv																																from "dotenv";
 dotenv.config(); // for reading from .env file

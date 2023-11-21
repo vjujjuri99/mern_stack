@@ -6,4 +6,4 @@ export { delete_handler } from "./delete/delete_handler.js";
 //PUT CALL
 export { update_details_handler } from "./put/update_handler.js";
 //POST CALL
-export { register_handler } from "./post/register_handler.js";
+export { register_handler } from "./post/register/register_handler.js";

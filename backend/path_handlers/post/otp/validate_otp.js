@@ -1,4 +1,4 @@
-import { UserOTPModel } from "../../db/schema.js";
+import { UserOTPModel } from "../../../db/schema.js";
 
 // Function to validate OTP and delete the entry if successful
 const validateOTPAndDeleteEntry = async ({ phone_number, otp }) => {

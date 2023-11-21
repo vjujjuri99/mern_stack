@@ -17,9 +17,9 @@ import { register_db_validator } from "./utils/db_validators.js";
 import { get_details_byId } from "./path_handlers/index.js";
 import { update_alldetails_handler } from "./path_handlers/put/update_all.js";
 import { delete_handler_byID } from "./path_handlers/delete/delete_handler.js";
-import { handleGenerateOTPEndpoint } from "./path_handlers/post/generate_otp.js";
-import { login_handler } from "./path_handlers/post/login_handler.js";
-import { handleValidateOTPAndDelete } from "./path_handlers/post/validate_otp.js";
+import { handleGenerateOTPEndpoint } from "./path_handlers/post/otp/generate_otp.js";
+import { login_handler } from "./path_handlers/post/login/login_handler.js";
+import { handleValidateOTPAndDelete } from "./path_handlers/post/otp/validate_otp.js";
 const app = express()
 app.use(cors({origin: "*"}))
 app.use(bodyParser.json());                          //Returns middleware that only parses json

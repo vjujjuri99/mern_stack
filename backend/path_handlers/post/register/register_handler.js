@@ -1,5 +1,5 @@
-import { UserModel } from "../../db/schema.js";
-import { getEncryptedPassword } from "../../middlewares/hashing/bycrpt_helper.js";
+import { UserModel } from "../../../db/schema.js";
+import { getEncryptedPassword } from "../../../middlewares/hashing/bycrpt_helper.js";
 /**
  * This register_handler function will save the register details
  * @param {*} request request object of Express

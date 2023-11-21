@@ -1,6 +1,6 @@
-import { UserModel } from "../../db/schema.js";
-import { comparePasswords } from "../../middlewares/hashing/bycrpt_helper.js";
-import { jwt_token_generator } from "../../middlewares/jwtToken_helper.js";
+import { UserModel } from "../../../db/schema.js";
+import { comparePasswords } from "../../../middlewares/hashing/bycrpt_helper.js";
+import { jwt_token_generator } from "../../../middlewares/jwtToken_helper.js";
 
 /**
  * This function is used to verify whether the user exists or not.
