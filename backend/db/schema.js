@@ -8,12 +8,17 @@ const UserSchema = mongoose.Schema({
     email:          { type: String, required: true },
     username:       { type: String, required: true },
     password:       { type: String, required: true },
-    otp:            { type: Number },
+})
+
+const UserOtpSchema =  mongoose.Schema({
+    phone_number:   { type: String, required: true },
+    otp:            { type: Number, required: true  },
     otpExpiration:  { type: Date },
 })
 
 //creating model
 const UserModel = mongoose.model("UserModel", UserSchema)
 
+const UserOTPModel = mongoose.model("UserOTPModel", UserOtpSchema)
 
-export { UserModel }
+export { UserModel, UserOTPModel }
