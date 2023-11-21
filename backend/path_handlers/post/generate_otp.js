@@ -1,19 +1,11 @@
-import { UserModel, UserOTPModel } from "../../db/schema.js";
-import nodemailer from 'nodemailer';
+import { UserOTPModel } from "../../db/schema.js";
 import twilio from 'twilio';
-
-/// Nodemailer configuration (replace with your SMTP server details)
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//       user: 'vjujjuri99@gmail.com',
-//       pass: 'Vinay@911146',
-//     },
-//   });
+import dotenv																																from "dotenv";
+dotenv.config(); // for reading from .env file
   
-const accountSid = 'ACbe5318095336e331ed673232df0754af';
-const authToken = '23ebecfc1d13019ed81824478e0dbba5';
-const twilioPhoneNumber = '+16789169370';
+const accountSid = process.env.ACCOUNT_SID;
+const authToken = process.env.AUTH_TOKEN;
+const twilioPhoneNumber = process.env.TWILION_NUMBER;
 
 const client = twilio(accountSid, authToken);
   // Function to generate OTP, save it to the user in the database, and send it to the user's email
@@ -64,6 +56,6 @@ const generateAndSendOTP = async ({ phone_number }) => {
     }
   };
 
-  
+
   
   export { generateAndSendOTP, handleGenerateOTPEndpoint };
